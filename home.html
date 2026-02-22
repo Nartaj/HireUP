@@ -1,0 +1,1498 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HireUp | Swipe Your Next IT Job</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&amp;family=Inter:wght@200;300;400;500;600&amp;family=JetBrains+Mono:wght@300;400;500&amp;display=swap" rel="stylesheet">
+    <!-- Tailwind & Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+      const cards = ['pricing-hobby', 'pricing-pro', 'pricing-ent'];
+      function updateState(selectedId) {
+      cards.forEach(id => {
+      const card = document.getElementById(id);
+      if (!card) return;
+      const isSelected = id === selectedId;
+      if (isSelected) {
+      // Selected: Scale up, Shadow, Full Opacity, Border Highlight
+      card.classList.add('scale-[1.02]', 'shadow-2xl', 'z-10', 'ring-1', 'ring-obsidian/5', 'opacity-100');
+      card.classList.remove('scale-[0.98]', 'opacity-60', 'hover:shadow-xl');
+      if (id !== 'pricing-pro') {
+      card.classList.add('border-obsidian');
+      card.classList.remove('border-border');
+      }
+      } else {
+      // Unselected: Scale down slightly, Dim, Remove Shadow
+      card.classList.remove('scale-[1.02]', 'shadow-2xl', 'z-10', 'border-obsidian', 'ring-1', 'ring-obsidian/5', 'opacity-100');
+      card.classList.add('border-border', 'opacity-60', 'scale-[0.98]');
+      }
+      });
+      }
+      cards.forEach(id => {
+      const card = document.getElementById(id);
+      if (card) {
+      card.addEventListener('click', () => updateState(id));
+      card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      updateState(id);
+      }
+      });
+      card.addEventListener('mouseenter', () => {
+      // Lift slightly on hover if unselected
+      if (card.classList.contains('opacity-60')) {
+      card.classList.remove('opacity-60');
+      card.classList.add('opacity-90');
+      }
+      });
+      card.addEventListener('mouseleave', () => {
+      // Revert if not selected
+      const isSelected = card.classList.contains('z-10');
+      if (!isSelected) {
+      card.classList.remove('opacity-90');
+      card.classList.add('opacity-60');
+      }
+      });
+      }
+      });
+      updateState('pricing-pro');
+      });
+    </script>
+    <script>
+      tailwind.config = {
+      theme: {
+      extend: {
+      fontFamily: {
+      sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+      display: ['"Plus Jakarta Sans"', 'sans-serif'],
+      mono: ['"JetBrains Mono"', 'monospace'],
+      },
+      colors: {
+      canvas: '#FAFAFA',
+      surface: '#FFFFFF',
+      obsidian: '#111111',
+      charcoal: '#333333',
+      subtle: '#737373',
+      border: '#E5E5E5',
+      accent: '#252525',
+      primary: '#000000',
+      },
+      letterSpacing: {
+      tight: '-0.02em',
+      tighter: '-0.04em',
+      }
+      }
+      }
+      }
+    </script>
+    <style>
+      html {
+      scroll-behavior: smooth;
+      }
+      body {
+      margin: 0;
+      background-color: #FAFAFA;
+      color: #111111;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      }
+      .technical-grid {
+      background-size: 40px 40px;
+      background-image:
+      linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+      mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+      }
+      .premium-card {
+      background: #FFFFFF;
+      border: 1px solid #EAEAEA;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02), 0 8px 16px -4px rgba(0,0,0,0.04);
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .premium-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.03), 0 12px 24px -6px rgba(0,0,0,0.06);
+      border-color: #D4D4D4;
+      }
+      .node-line { stroke-dasharray: 4; animation: dash 30s linear infinite; }
+      @keyframes dash { to { stroke-dashoffset: -100; } }
+    </style>
+
+    <style>
+      .pricing-transition {
+      transition:
+      transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 500ms cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform, opacity, box-shadow;
+      }
+    </style>
+    <style>
+      @keyframes shimmer { 100% { transform: translateX(100%); } } .shimmer-layer { transform: translateX(-100%); } .group:hover .shimmer-layer { animation: shimmer 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+    </style>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  <link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">
+      .font-geist { font-family: 'Geist', sans-serif !important; }
+    </style><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-roboto">
+      .font-roboto { font-family: 'Roboto', sans-serif !important; }
+    </style><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-montserrat">
+      .font-montserrat { font-family: 'Montserrat', sans-serif !important; }
+    </style><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-poppins">
+      .font-poppins { font-family: 'Poppins', sans-serif !important; }
+    </style><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><style id="all-fonts-style-font-playfair">
+      .font-playfair { font-family: 'Playfair Display', serif !important; }
+    </style><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-instrument-serif">
+      .font-instrument-serif { font-family: 'Instrument Serif', serif !important; }
+    </style><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><style id="all-fonts-style-font-merriweather">
+      .font-merriweather { font-family: 'Merriweather', serif !important; }
+    </style><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">
+      .font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
+    </style><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-jakarta">
+      .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }
+    </style><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-manrope">
+      .font-manrope { font-family: 'Manrope', sans-serif !important; }
+    </style><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-space-grotesk">
+      .font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }
+    </style><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-work-sans">
+      .font-work-sans { font-family: 'Work Sans', sans-serif !important; }
+    </style><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-pt-serif">
+      .font-pt-serif { font-family: 'PT Serif', serif !important; }
+    </style><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist-mono">
+      .font-geist-mono { font-family: 'Geist Mono', monospace !important; }
+    </style><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-space-mono">
+      .font-space-mono { font-family: 'Space Mono', monospace !important; }
+    </style><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-quicksand">
+      .font-quicksand { font-family: 'Quicksand', sans-serif !important; }
+    </style><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-nunito">
+      .font-nunito { font-family: 'Nunito', sans-serif !important; }
+    </style><link id="all-fonts-link-font-newsreader" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap"><style id="all-fonts-style-font-newsreader">
+      .font-newsreader { font-family: 'Newsreader', serif !important; }
+    </style><link id="all-fonts-link-font-google-sans-flex" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-google-sans-flex">
+      .font-google-sans-flex { font-family: 'Google Sans Flex', sans-serif !important; }
+    </style><link id="all-fonts-link-font-oswald" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-oswald">
+      .font-oswald { font-family: 'Oswald', sans-serif !important; }
+    </style><link id="all-fonts-link-font-dm-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-dm-sans">
+      .font-dm-sans { font-family: 'DM Sans', sans-serif !important; }
+    </style><link id="all-fonts-link-font-cormorant" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-cormorant">
+      .font-cormorant { font-family: 'Cormorant Garamond', serif !important; }
+    </style></head>
+
+  <body class="w-full relative bg-canvas">
+    <!-- Fixed Backgrounds -->
+    <div class="fixed inset-0 z-0 technical-grid pointer-events-none"></div>
+    <div id="canvas-container" class="fixed inset-0 z-0 opacity-100">
+      <canvas width="1370" height="867" style="display: block; width: 1218px; height: 771px;" class=""></canvas>
+      <canvas width="1370" height="867" style="display: block; width: 1218px; height: 771px;"></canvas>
+      <canvas width="1370" height="867" style="display: block; width: 1218px; height: 771px;"></canvas>
+      <canvas width="1370" height="867" style="display: block; width: 1218px; height: 771px;"></canvas>
+      <canvas width="1370" height="867" style="display: block; width: 1218px; height: 771px;"></canvas>
+      <canvas width="1370" height="867" style="display: block; width: 1218px; height: 771px;"></canvas>
+      <canvas width="1370" height="867" style="display: block; width: 1218px; height: 771px;"></canvas>
+    <canvas width="1370" height="867" style="display: block; width: 1218px; height: 771px;"></canvas><canvas width="1370" height="867" style="display: block; width: 1218px; height: 771px;"></canvas><canvas width="1370" height="867" style="display: block; width: 1218px; height: 771px;"></canvas><canvas width="1370" height="867" style="display: block; width: 1218px; height: 771px;"></canvas><canvas width="1370" height="867" style="display: block; width: 1218px; height: 771px;"></canvas><canvas width="1067" height="699" style="display: block; width: 949px; height: 622px;"></canvas><canvas width="1966" height="1199" style="display: block; width: 1430px; height: 872px;"></canvas><canvas width="1430" height="872" style="display: block; width: 1430px; height: 872px;"></canvas><canvas width="1430" height="872" style="display: block; width: 1430px; height: 872px;"></canvas></div>
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 w-full px-6 py-5 md:px-12 flex justify-between items-center backdrop-blur-md border-b border-border/50 transition-all duration-300">
+      <div class="flex items-center gap-2">
+        <div class="flex text-slate-950 w-8 h-8 rounded-lg shadow-sm items-center justify-center">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="">
+    <rect width="20" height="14" x="2" y="7" rx="2" ry="2" class=""></rect>
+    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" class=""></path>
+  </svg>
+</div>
+        <span class="font-sans text-xl font-bold tracking-tight text-obsidian">
+          HireUp
+        </span>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#" class="font-sans text-xs font-medium text-subtle hover:text-obsidian transition-colors">
+          Product
+        </a>
+        <a href="#" class="font-sans text-xs font-medium text-subtle hover:text-obsidian transition-colors">
+          How it Works
+        </a>
+        <a href="#" class="font-sans text-xs font-medium text-subtle hover:text-obsidian transition-colors">
+          For Employers
+        </a>
+      </nav>
+
+      <div class="flex items-center gap-5">
+        <a href="#" class="hidden md:block font-sans text-xs font-medium text-subtle hover:text-obsidian transition-colors">
+          Sign in
+        </a>
+        <button class="group relative isolate overflow-hidden bg-obsidian text-white text-xs font-semibold px-6 py-2.5 rounded shadow-[0_1px_2px_rgba(0,0,0,0.08)] ring-1 ring-white/10 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] hover:scale-[1.04] hover:shadow-[0_8px_24px_-4px_rgba(0,0,0,0.25)] hover:ring-white/20 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-obsidian/20 focus:ring-offset-1">
+          <div class="shimmer-layer absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent z-10"></div>
+          <span class="relative z-20">Start Swiping</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Content Wrapper -->
+    <div class="z-10 flex flex-col w-full relative">
+      <!-- HERO SECTION -->
+      <section class="min-h-[90vh] flex flex-col lg:flex-row md:px-12 lg:px-20 pt-32 pr-6 pb-20 pl-6 relative gap-x-16 gap-y-16 items-center justify-between">
+        <div class="max-w-2xl space-y-10 relative z-10">
+          <div class="space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-50 border border-slate-200 shadow-sm">
+              <span class="flex h-2 w-2 relative">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span class="font-sans text-[11px] font-medium text-slate-600 tracking-tight">
+                v2.0 Now Available on iOS &amp; Android
+              </span>
+            </div>
+            <h1 class="font-sans text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tighter text-obsidian leading-[0.95]">
+              Swipe Your
+              <br>
+              <span class="text-subtle">Next Job.</span>
+            </h1>
+            <p class="max-w-md font-sans text-base text-subtle leading-relaxed">
+              HireUp connects developers and employers through instant matching.
+              Users swipe jobs or candidates, get matched, and start chatting
+              immediately.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4">
+            <button class="group relative isolate overflow-hidden bg-obsidian text-white text-sm font-semibold px-8 py-3.5 rounded shadow-[0_1px_2px_rgba(0,0,0,0.08)] ring-1 ring-white/10 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] hover:scale-[1.03] hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.3)] hover:ring-white/20 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-obsidian/20 focus:ring-offset-2 flex items-center gap-2">
+              <div class="shimmer-layer absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent z-0 pointer-events-none"></div>
+              <span class="relative z-10">Start Swiping</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone relative z-10 transition-transform duration-300 group-hover:translate-x-1">
+                <rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect>
+                <path d="M12 18h.01"></path>
+              </svg>
+            </button>
+            <button class="px-8 py-3.5 bg-white text-obsidian border border-border text-sm font-medium rounded shadow-sm transition-all duration-300 ease-out hover:bg-gray-50 hover:border-obsidian/40 hover:text-black hover:shadow-md active:scale-[0.97] active:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-obsidian/10 focus:ring-offset-2">
+              View Demo
+            </button>
+          </div>
+        </div>
+
+        <!-- Visual -->
+        <div class="relative w-full max-w-lg aspect-square lg:aspect-[4/3] flex items-center justify-center">
+  <div class="absolute inset-0 bg-gradient-to-tr from-canvas via-white to-canvas opacity-50 blur-3xl"></div>
+  <div class="absolute w-[280px] sm:w-[300px] h-[540px] bg-black/5 rounded-[3rem] blur-2xl translate-y-8"></div>
+  <div class="w-[300px] sm:w-[320px] h-[600px] bg-white rounded-[3rem] border-[6px] border-[#111111] ring-1 ring-inset ring-white/10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.05)] relative flex flex-col overflow-hidden select-none mx-auto group">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-[#111111] rounded-b-[1rem] z-40 flex justify-center items-end pb-1.5">
+      <div class="w-12 h-1 bg-white/10 rounded-full"></div>
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none z-30"></div>
+    <div class="flex-1 bg-[#FAFAFA] relative overflow-hidden flex flex-col rounded-[2.5rem] ring-1 ring-inset ring-black/5">
+      <div class="h-16 flex items-center justify-between px-6 pt-5 z-20 bg-white/80 backdrop-blur-md border-b border-black/[0.04]">
+        <div class="text-obsidian font-semibold text-lg font-sans tracking-tight">
+          HireUp
+        </div>
+        <div class="w-8 h-8 rounded-full bg-neutral-100 border border-neutral-200/60 flex items-center justify-center shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-neutral-700">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div>
+      </div>
+      <div class="flex-1 relative w-full flex items-center justify-center p-5">
+        <div class="absolute w-[88%] aspect-[3/4] bg-white rounded-3xl shadow-[0_8px_30px_-10px_rgba(0,0,0,0.1)] border border-neutral-200/60 scale-95 translate-y-5 opacity-50 z-0"></div>
+        <div class="absolute w-[92%] aspect-[3/4] bg-white rounded-3xl shadow-[0_8px_30px_-10px_rgba(0,0,0,0.1)] border border-neutral-200/80 scale-[0.97] translate-y-2.5 opacity-80 z-[5]"></div>
+        <div class="absolute w-full max-w-[270px] aspect-[3/4] bg-white rounded-3xl shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.05)] z-10 flex flex-col overflow-hidden hover:rotate-1 hover:scale-[1.02] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-grab active:cursor-grabbing">
+          <div class="h-[55%] bg-gradient-to-br from-neutral-800 to-black relative p-5 flex flex-col justify-end text-white">
+            <div class="absolute top-4 right-4 bg-white/10 backdrop-blur-md px-2.5 py-1 rounded-md text-[11px] font-semibold border border-white/10 tracking-wide">
+              $140k
+            </div>
+            <div class="font-semibold text-2xl tracking-tight leading-tight mb-1">
+              Product Designer
+            </div>
+            <div class="text-neutral-300 text-xs font-medium tracking-wide uppercase">Linear</div>
+          </div>
+          <div class="h-[45%] p-5 flex flex-col gap-3 bg-white justify-between">
+            <div class="flex gap-2 flex-wrap">
+              <span class="px-2.5 py-1 bg-neutral-100 border border-neutral-200 rounded-md text-[10px] font-semibold text-neutral-600 tracking-wide">
+                Remote
+              </span>
+              <span class="px-2.5 py-1 bg-neutral-100 border border-neutral-200 rounded-md text-[10px] font-semibold text-neutral-600 tracking-wide">
+                Figma
+              </span>
+            </div>
+            <p class="text-xs text-neutral-500 leading-relaxed line-clamp-3">
+              Looking for a product designer with a strong visual background to lead our design system and shape our core product experience.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="h-24 px-10 flex items-center justify-between gap-6 pb-6 pt-2 z-20 bg-gradient-to-t from-[#FAFAFA] to-transparent">
+        <button class="w-14 h-14 rounded-full bg-white border border-neutral-200 shadow-[0_8px_20px_-8px_rgba(0,0,0,0.1)] text-neutral-400 flex items-center justify-center hover:scale-105 hover:text-neutral-600 hover:border-neutral-300 transition-all duration-300 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+        <button class="w-14 h-14 rounded-full bg-black border border-black shadow-[0_8px_20px_-8px_rgba(0,0,0,0.2)] text-white flex items-center justify-center hover:scale-105 hover:bg-neutral-800 transition-all duration-300 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" class=""></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+      </section>
+
+      <!-- LOGOS -->
+      <section class="border-y border-border/60 bg-white pt-16 pb-16">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-10">
+          <p class="text-obsidian whitespace-nowrap md:w-auto md:text-left text-xl font-extrabold text-center w-full">
+            Growing Our Partner Network
+          </p>
+          <div class="flex flex-wrap md:justify-end hover:opacity-100 transition-opacity duration-500 opacity-60 gap-x-12 gap-y-8 justify-center">
+            <!-- Simple Text Logos for cleaner look -->
+            
+            <span class="group relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-obsidian px-6 py-2.5 font-sans text-sm font-semibold text-white shadow-sm ring-1 ring-white/10 transition-all duration-300 hover:shadow-md hover:-translate-y-px cursor-pointer">
+              <span class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent skew-x-12 transition-transform duration-700 ease-in-out group-hover:translate-x-full"></span>
+              <span class="relative z-10 tracking-tight">Join the Network</span>
+            </span>
+            
+          </div>
+        </div>
+      </section>
+      <section id="decision-lifecycle" class="relative w-full bg-canvas border-b border-border/60" style="height: 350vh;">
+        <div class="sticky top-0 left-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center">
+          <div class="absolute inset-0 bg-[radial-gradient(#00000008_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+          <div class="md:px-12 z-10 flex flex-col w-full h-full max-w-4xl pt-20 pr-6 pb-20 pl-6 relative items-center">
+            <div class="text-center mb-12 shrink-0 opacity-0 transition-opacity duration-700" id="lifecycle-header">
+              <h2 class="font-sans text-3xl md:text-4xl font-semibold text-obsidian tracking-tight mb-3">
+                How HireUp Works
+              </h2>
+              <p class="text-subtle text-base max-w-md mx-auto">
+                From swipe to successful match.
+              </p>
+            </div>
+            <div class="relative w-full max-w-2xl flex-1 flex flex-col justify-center my-auto">
+              <div class="absolute left-1/2 top-4 bottom-4 w-px bg-border/60 -translate-x-1/2"></div>
+              <div id="lifecycle-line" class="absolute left-1/2 top-4 w-px bg-obsidian -translate-x-1/2 transition-all duration-75 ease-linear h-0 max-h-[calc(100%-2rem)]" style="height: 0%;"></div>
+              <div class="space-y-24 py-8 relative">
+                <!-- Step 1 -->
+                <div class="lifecycle-step group flex items-center justify-between w-full transition-all duration-500" data-threshold="0.1">
+                  <div class="w-[42%] text-right pr-8">
+                    <span class="font-mono text-[10px] text-subtle uppercase tracking-wider block mb-1">
+                      01 Discover
+                    </span>
+                    <h3 class="font-sans text-lg font-semibold text-obsidian">
+                      Discover Opportunities
+                    </h3>
+                    <p class="text-sm text-subtle mt-1 hidden md:block">
+                      Browse jobs or candidates instantly.
+                    </p>
+                  </div>
+                  <div class="relative shrink-0 z-10">
+                    <div class="w-3 h-3 rounded-full border border-border bg-canvas group-[.active]:border-obsidian group-[.active]:bg-obsidian transition-colors duration-300"></div>
+                  </div>
+                  <div class="w-[42%] pl-8">
+                    <div class="bg-white border border-border p-4 rounded-xl shadow-sm inline-block text-left w-full max-w-[220px]">
+                      <div class="flex items-start justify-between mb-3">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="14" x="2" y="3" rx="2"></rect>
+                            <line x1="8" x2="16" y1="21" y2="21"></line>
+                            <line x1="12" x2="12" y1="17" y2="21"></line>
+                          </svg>
+                        </div>
+                        <span class="text-[10px] font-bold bg-slate-100 px-2 py-0.5 rounded-full text-slate-600">
+                          Remote
+                        </span>
+                      </div>
+                      <div class="font-bold text-sm text-obsidian">
+                        Frontend Developer
+                      </div>
+                      <div class="flex flex-wrap gap-1 mt-2">
+                        <span class="text-[10px] bg-slate-50 border border-slate-100 px-1.5 py-0.5 rounded text-subtle">
+                          React
+                        </span>
+                        <span class="text-[10px] bg-slate-50 border border-slate-100 px-1.5 py-0.5 rounded text-subtle">
+                          TypeScript
+                        </span>
+                        <span class="text-[10px] bg-slate-50 border border-slate-100 px-1.5 py-0.5 rounded text-subtle">
+                          Junior
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Step 2 -->
+                <div class="lifecycle-step group flex items-center justify-between w-full transition-all duration-500" data-threshold="0.35">
+                  <div class="w-[42%] text-right pr-8">
+                    <div class="bg-white border border-border p-4 rounded-xl shadow-sm inline-block text-left w-full max-w-[220px]">
+                      <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 10v12"></path>
+                            <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"></path>
+                          </svg>
+                        </div>
+                        <div>
+                          <div class="text-xs font-bold text-obsidian">
+                            Liked by Employer
+                          </div>
+                          <div class="text-[10px] text-subtle">
+                            TechCorp Inc.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-1.5 text-[10px] font-medium text-emerald-600 bg-emerald-50/80 px-2 py-1.5 rounded w-fit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Skills match detected
+                      </div>
+                    </div>
+                  </div>
+                  <div class="relative shrink-0 z-10">
+                    <div class="w-3 h-3 rounded-full border border-border bg-canvas group-[.active]:border-obsidian group-[.active]:bg-obsidian transition-colors duration-300"></div>
+                  </div>
+                  <div class="w-[42%] pl-8">
+                    <span class="font-mono text-[10px] text-subtle uppercase tracking-wider block mb-1">
+                      02 Swipe &amp; Apply
+                    </span>
+                    <h3 class="font-sans text-lg font-semibold text-obsidian">
+                      Swipe to Apply
+                    </h3>
+                    <p class="text-sm text-subtle mt-1 hidden md:block">
+                      Swipe right to like, left to skip.
+                    </p>
+                  </div>
+                </div>
+                <!-- Step 3 -->
+                <div class="lifecycle-step group flex items-center justify-between w-full transition-all duration-500" data-threshold="0.60">
+                  <div class="w-[42%] text-right pr-8">
+                    <span class="font-mono text-[10px] text-subtle uppercase tracking-wider block mb-1">
+                      03 Match
+                    </span>
+                    <h3 class="font-sans text-lg font-semibold text-obsidian">
+                      It’s a Match
+                    </h3>
+                    <p class="text-sm text-subtle mt-1 hidden md:block">
+                      Mutual interest creates a match instantly.
+                    </p>
+                  </div>
+                  <div class="relative shrink-0 z-10">
+                    <div class="w-3 h-3 rounded-full border border-border bg-canvas group-[.active]:border-obsidian group-[.active]:bg-obsidian transition-colors duration-300"></div>
+                  </div>
+                  <div class="w-[42%] pl-8">
+                    <div class="bg-obsidian text-white p-5 rounded-xl shadow-lg inline-block text-left w-full max-w-[220px] relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+                      <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none"></div>
+                      <div class="relative z-10 flex flex-col items-center text-center">
+                        <div class="flex -space-x-3 mb-3">
+                          <div class="w-9 h-9 rounded-full bg-slate-200 border-[3px] border-obsidian flex items-center justify-center overflow-hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400">
+                              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                              <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                          </div>
+                          <div class="w-9 h-9 rounded-full bg-indigo-500 border-[3px] border-obsidian flex items-center justify-center text-white font-bold text-[10px]">
+                            TC
+                          </div>
+                        </div>
+                        <div class="text-sm font-bold mb-0.5">You matched!</div>
+                        <div class="text-[11px] text-white/70">
+                          with TechCorp
+                        </div>
+                        <div class="mt-3 w-full py-1.5 bg-white/10 rounded text-[10px] font-medium hover:bg-white/20 transition-colors cursor-pointer">
+                          Start Chatting
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Step 4 -->
+                <div class="lifecycle-step group flex items-center justify-between w-full transition-all duration-500" data-threshold="0.85">
+                  <div class="w-[42%] text-right pr-8">
+                    <div class="bg-white border border-border p-4 rounded-xl shadow-sm inline-block text-left w-full max-w-[220px] space-y-3">
+                      <div class="bg-slate-50 p-2.5 rounded-2xl rounded-tl-sm text-[11px] text-slate-700 leading-snug">
+                        Hi! Your profile looks great. When are you available?
+                      </div>
+                      <div class="bg-obsidian text-white p-2.5 rounded-2xl rounded-tr-sm text-[11px] leading-snug ml-auto w-fit max-w-[85%]">
+                        Thanks! I'm free Tuesday afternoon.
+                      </div>
+                      <div class="flex items-center gap-1.5 text-[10px] text-subtle justify-end pt-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                        <span>Interview Scheduled</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="relative shrink-0 z-10">
+                    <div class="w-3 h-3 rounded-full border border-border bg-canvas group-[.active]:border-obsidian group-[.active]:bg-obsidian transition-colors duration-300"></div>
+                  </div>
+                  <div class="w-[42%] pl-8">
+                    <span class="font-mono text-[10px] text-subtle uppercase tracking-wider block mb-1">
+                      04 Chat
+                    </span>
+                    <h3 class="font-sans text-lg font-semibold text-obsidian">
+                      Start Conversation
+                    </h3>
+                    <p class="text-sm text-subtle mt-1 hidden md:block">
+                      Chat in real time and continue the hiring process.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          (function(){const section=document.getElementById('decision-lifecycle');const header=document.getElementById('lifecycle-header');const line=document.getElementById('lifecycle-line');const steps=section.querySelectorAll('.lifecycle-step');function handleScroll(){if(!section)return;const rect=section.getBoundingClientRect();const viewH=window.innerHeight;const travelDistance=rect.height-viewH;const scrolled=-rect.top;let progress=scrolled/travelDistance;progress=Math.max(0,Math.min(1,progress));if(progress>0.02)header.style.opacity='1';else header.style.opacity='0';line.style.height=(progress*100)+'%';steps.forEach(step=>{const t=parseFloat(step.dataset.threshold);if(progress>=t){if(progress<t+0.15){step.classList.add('active');step.classList.replace('opacity-30','opacity-100');step.style.transform='scale(1.05)';}else{step.classList.add('active');step.classList.replace('opacity-30','opacity-50');step.style.transform='scale(1)';}}else{step.classList.remove('active');step.classList.replace('opacity-100','opacity-30');step.classList.replace('opacity-50','opacity-30');step.style.transform='scale(1)';}});};window.addEventListener('scroll',handleScroll,{passive:true});handleScroll();})();
+        </script>
+      </section>
+      <section class="py-32 px-6 md:px-12 lg:px-20">
+        <div class="max-w-7xl mr-auto ml-auto">
+          <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+            <div class="max-w-xl">
+              <h2 class="font-sans text-4xl md:text-5xl font-semibold text-obsidian tracking-tight mb-6 leading-[1.1]">
+                Everything You Need to
+                <span class="text-subtle block">Get Hired Faster.</span>
+              </h2>
+              <p class="text-subtle text-lg leading-relaxed">
+                HireUp simplifies hiring by combining swipe matching, instant
+                matches, and real-time communication in one platform.
+              </p>
+            </div>
+            <a href="#" class="pb-1 border-b border-obsidian text-sm font-medium hover:opacity-70 transition-opacity mb-2">
+              Explore Platform Features
+            </a>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <!-- Card 1: Decision Lineage -->
+            <div class="md:col-span-8 group relative bg-white border border-border rounded-xl overflow-hidden hover:border-obsidian/30 transition-all duration-500">
+              <div class="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:24px_24px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+              <div class="relative z-10 p-10 h-full flex flex-col justify-between">
+                <div class="flex justify-between items-start">
+                  <div class="max-w-md">
+                    <div class="w-10 h-10 bg-canvas border border-border rounded flex items-center justify-center mb-6 text-obsidian shadow-sm">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone">
+                        <rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect>
+                        <path d="M12 18h.01"></path>
+                      </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-obsidian mb-3">
+                      Swipe-Based Matching
+                    </h3>
+                    <p class="text-subtle leading-relaxed">
+                      Discover jobs or candidates instantly. Swipe right to like
+                      or apply, swipe left to skip. A faster alternative to
+                      traditional job searching.
+                    </p>
+                  </div>
+                </div>
+                <div class="mt-12 h-48 w-full relative flex items-center justify-center overflow-hidden border-t border-border/40 pt-6">
+                  <div class="absolute w-40 h-52 bg-white border border-border rounded-xl shadow-sm transform -rotate-6 translate-x-4 translate-y-2 opacity-60"></div>
+                  <div class="absolute w-40 h-52 bg-white border border-border rounded-xl shadow-md transform rotate-3 translate-x-2 translate-y-1 opacity-80"></div>
+                  <div class="absolute w-40 h-52 bg-white border border-border rounded-xl shadow-xl flex flex-col overflow-hidden group-hover:translate-x-6 group-hover:rotate-6 transition-all duration-500 ease-out">
+                    <div class="h-1/2 bg-slate-50 flex items-center justify-center">
+                      <div class="w-12 h-12 rounded-full bg-slate-200"></div>
+                    </div>
+                    <div class="p-3 space-y-2">
+                      <div class="h-2 w-3/4 bg-slate-200 rounded"></div>
+                      <div class="h-2 w-1/2 bg-slate-100 rounded"></div>
+                    </div>
+                    <div class="absolute bottom-4 right-4 text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m9 18 6-6-6-6"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Immutable Audit -->
+            <div class="md:col-span-4 group relative bg-white border border-border rounded-xl overflow-hidden hover:border-obsidian/30 transition-all duration-500 flex flex-col">
+              <div class="p-10 relative z-10 flex flex-col h-full">
+                <div class="w-10 h-10 bg-canvas border border-border rounded flex items-center justify-center mb-6 text-obsidian shadow-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" class=""></polygon>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-obsidian mb-3">
+                  Instant Matches
+                </h3>
+                <p class="text-sm text-subtle leading-relaxed mb-8">
+                  When both sides like each other, a match is created
+                  automatically and conversation opens instantly.
+                </p>
+                <div class="mt-auto relative w-full h-32 flex items-center justify-center gap-4">
+                  <div class="w-12 h-12 rounded-full bg-indigo-100 border-2 border-white shadow-sm flex items-center justify-center text-indigo-600 font-bold text-xs relative z-10 group-hover:translate-x-2 transition-transform duration-500">
+                    JD
+                  </div>
+                  <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-lg z-20 scale-0 group-hover:scale-110 transition-transform duration-500 delay-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 6 9 17 4 12"></path>
+                    </svg>
+                  </div>
+                  <div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-white shadow-sm flex items-center justify-center text-white font-bold text-xs relative z-10 group-hover:-translate-x-2 transition-transform duration-500">
+                    TC
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: Automated Synthesis -->
+            <div class="md:col-span-12 group relative bg-obsidian border border-border rounded-xl overflow-hidden hover:border-obsidian/30 transition-all duration-500">
+              <div class="flex flex-col md:flex-row pt-10 pr-10 pb-10 pl-10 gap-x-12 gap-y-12 items-center">
+                <div class="flex-1 max-w-lg">
+                  <div class="w-10 h-10 bg-transparent border border-white/10 rounded flex items-center justify-center mb-6 text-white shadow-[0_0_15px_rgba(255,255,255,0.15)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle">
+                      <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path>
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-semibold text-white mb-2">
+                    Real-Time Chat
+                  </h3>
+                  <p class="text-[#d6d6d6] leading-relaxed">
+                    Start conversations immediately after matching. Messages
+                    sync in real time, allowing faster communication between
+                    developers and employers.
+                  </p>
+                </div>
+                <div class="flex-1 w-full flex items-center justify-center h-40 relative px-6">
+                  <div class="w-full max-w-sm bg-white border border-border shadow-lg rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-8 bg-slate-50 border-b border-border flex items-center px-3 gap-1.5">
+                      <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                      <div class="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                      <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                    </div>
+                    <div class="p-4 space-y-3 bg-white">
+                      <div class="flex flex-col items-start space-y-1 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                        <div class="bg-[#2a2a2a] px-3 py-2 rounded-2xl rounded-tl-sm text-xs text-white max-w-[80%]">
+                          Hi, I saw you have experience with React?
+                        </div>
+                        <span class="text-[10px] text-slate-400 pl-1">
+                          10:42 AM
+                        </span>
+                      </div>
+                      <div class="flex flex-col items-end space-y-1 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-300">
+                        <div class="bg-[#000000] px-3 py-2 rounded-2xl rounded-tr-sm text-xs text-white max-w-[80%]">
+                          Yes! I've been using it for 3 years.
+                        </div>
+                        <span class="text-[10px] text-slate-400 pr-1">
+                          10:43 AM
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="py-24 px-6 md:px-12 lg:px-20 border-b border-border/60 bg-canvas">
+        <div class="max-w-7xl mx-auto">
+          <div class="flex flex-col md:flex-row items-end justify-between mb-20 gap-8">
+            <div class="max-w-2xl">
+              <h2 class="font-sans text-3xl font-semibold text-obsidian tracking-tight mb-4">
+                How a Decision Becomes Defensible
+              </h2>
+              <p class="font-sans text-subtle text-base leading-relaxed">
+                Oravia preserves reasoning from first assumption to final
+                outcome, ensuring every strategic choice is traceable and
+                auditable.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative w-full">
+            <style>
+              .def-active .def-num { border-color: #111; color: #111; background-color: #fff; transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+              .def-inactive .def-content { opacity: 0.4; filter: grayscale(100%); }
+              .def-active .def-content { opacity: 1; filter: grayscale(0%); transform: translateY(0); }
+              .def-step { transition: opacity 0.5s ease; }
+            </style>
+
+            <!-- Dynamic Connecting Line (Desktop) -->
+            <div class="absolute top-[1.125rem] left-0 right-0 h-px bg-border/60 hidden lg:block z-0">
+              <div id="def-line-fill" class="h-full bg-obsidian w-0 transition-all duration-700 ease-in-out" style="width: 0%;"></div>
+            </div>
+
+            <div id="def-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-x-8 gap-y-12 relative z-10">
+              <!-- Step 1 -->
+              <div class="def-step group flex flex-col gap-4 def-inactive" data-index="0">
+                <div class="flex items-center gap-4">
+                  <div class="def-num w-9 h-9 bg-white border border-border rounded flex items-center justify-center text-[10px] font-mono font-medium text-subtle shadow-sm transition-all duration-500 z-10">
+                    01
+                  </div>
+                  <div class="h-px flex-1 bg-border/60 lg:hidden"></div>
+                </div>
+                <div class="def-content transition-all duration-500">
+                  <h3 class="font-sans text-sm font-semibold text-obsidian mb-1.5">
+                    Decision Context
+                  </h3>
+                  <p class="text-xs text-subtle leading-relaxed">
+                    The business or product question being evaluated.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="def-step group flex flex-col gap-4 def-inactive" data-index="1">
+                <div class="flex items-center gap-4">
+                  <div class="def-num w-9 h-9 bg-white border border-border rounded flex items-center justify-center text-[10px] font-mono font-medium text-subtle shadow-sm transition-all duration-500 z-10">
+                    02
+                  </div>
+                  <div class="h-px flex-1 bg-border/60 lg:hidden"></div>
+                </div>
+                <div class="def-content transition-all duration-500">
+                  <h3 class="font-sans text-sm font-semibold text-obsidian mb-1.5">
+                    Assumptions Captured
+                  </h3>
+                  <p class="text-xs text-subtle leading-relaxed">
+                    Explicit assumptions recorded intentionally, not implied.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="def-step group flex flex-col gap-4 def-inactive" data-index="2">
+                <div class="flex items-center gap-4">
+                  <div class="def-num w-9 h-9 bg-white border border-border rounded flex items-center justify-center text-[10px] font-mono font-medium text-subtle shadow-sm transition-all duration-500 z-10">
+                    03
+                  </div>
+                  <div class="h-px flex-1 bg-border/60 lg:hidden"></div>
+                </div>
+                <div class="def-content transition-all duration-500">
+                  <h3 class="font-sans text-sm font-semibold text-obsidian mb-1.5">
+                    Evidence Linked
+                  </h3>
+                  <p class="text-xs text-subtle leading-relaxed">
+                    Data, analysis, and references attached as inputs.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="def-step group flex flex-col gap-4 def-inactive" data-index="3">
+                <div class="flex items-center gap-4">
+                  <div class="def-num w-9 h-9 bg-white border border-border rounded flex items-center justify-center text-[10px] font-mono font-medium text-subtle shadow-sm transition-all duration-500 z-10">
+                    04
+                  </div>
+                  <div class="h-px flex-1 bg-border/60 lg:hidden"></div>
+                </div>
+                <div class="def-content transition-all duration-500">
+                  <h3 class="font-sans text-sm font-semibold text-obsidian mb-1.5">
+                    Reasoning Structured
+                  </h3>
+                  <p class="text-xs text-subtle leading-relaxed">
+                    Logical connections formed between assumptions, evidence,
+                    and conclusions.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <div class="def-step group flex flex-col gap-4 def-inactive" data-index="4">
+                <div class="flex items-center gap-4">
+                  <div class="def-num w-9 h-9 bg-white border border-border rounded flex items-center justify-center text-[10px] font-mono font-medium text-subtle shadow-sm transition-all duration-500 z-10">
+                    05
+                  </div>
+                  <div class="h-px flex-1 bg-border/60 lg:hidden"></div>
+                </div>
+                <div class="def-content transition-all duration-500">
+                  <h3 class="font-sans text-sm font-semibold text-obsidian mb-1.5">
+                    Outcome Produced
+                  </h3>
+                  <p class="text-xs text-subtle leading-relaxed">
+                    A decision generated with clear justification.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 6 -->
+              <div class="def-step group flex flex-col gap-4 def-inactive" data-index="5">
+                <div class="flex items-center gap-4">
+                  <div class="def-num w-9 h-9 bg-white border border-border rounded flex items-center justify-center text-[10px] font-mono font-medium text-subtle shadow-sm transition-all duration-500 z-10">
+                    06
+                  </div>
+                  <div class="h-px flex-1 bg-border/60 lg:hidden"></div>
+                </div>
+                <div class="def-content transition-all duration-500">
+                  <h3 class="font-sans text-sm font-semibold text-obsidian mb-1.5">
+                    Versioned &amp; Preserved
+                  </h3>
+                  <p class="text-xs text-subtle leading-relaxed">
+                    The full reasoning chain is saved, diffable, and reviewable
+                    over time.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              (function() {
+                const grid = document.getElementById('def-grid');
+                const line = document.getElementById('def-line-fill');
+                const steps = grid.querySelectorAll('.def-step');
+
+                // Initial state: subdue all
+                steps.forEach(s => s.classList.add('def-inactive'));
+
+                function activateStep(index) {
+                  // Calculate line width (each step adds ~16.6%, plus a little to reach center)
+                  // We want to connect previous to current.
+                  // If index 0, width 0. If index 1, width to step 1.
+                  const percentage = index === 0 ? 0 : (index / (steps.length - 1)) * 100;
+                  line.style.width = percentage + '%';
+
+                  steps.forEach((step, i) => {
+                    if (i === index) {
+                      step.classList.add('def-active');
+                      step.classList.remove('def-inactive');
+                    } else {
+                      step.classList.remove('def-active');
+                      step.classList.add('def-inactive');
+                    }
+                  });
+                }
+
+                // Auto-play sequence on intersection
+                const observer = new IntersectionObserver((entries) => {
+                  if (entries[0].isIntersecting) {
+                    let current = 0;
+                    activateStep(0);
+
+                    const interval = setInterval(() => {
+                      current++;
+                      if (current >= steps.length) {
+                        clearInterval(interval);
+                      } else {
+                        activateStep(current);
+                      }
+                    }, 900);
+
+                    observer.disconnect();
+                  }
+                }, { threshold: 0.5 });
+
+                observer.observe(grid);
+
+                // Hover overrides
+                steps.forEach((step, i) => {
+                  step.addEventListener('mouseenter', () => activateStep(i));
+                });
+              })();
+            </script>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRICING -->
+      <section class="py-32 px-6 md:px-12 lg:px-20 border-b border-border bg-canvas" id="pricing-section">
+        <div class="max-w-6xl mx-auto">
+          <div class="font-bold text-center mb-16">
+            <h2 class="font-sans text-3xl text-obsidian tracking-tight mb-4 font-extrabold md:text-5xl">
+              Simple Pricing for Modern Hiring
+            </h2>
+            <p class="text-subtle text-base max-w-2xl mr-auto ml-auto">
+              Flexible plans for job seekers, startups, and growing teams.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative gap-x-8 gap-y-8 items-start">
+            <!-- Free Plan -->
+            <div id="plan-free" class="bg-white p-8 rounded-xl border border-border shadow-sm flex flex-col hover:border-obsidian/30 hover:shadow-md transition-all duration-300">
+              <h3 class="font-semibold text-xl text-obsidian mb-2">
+                Free Plan
+              </h3>
+              <p class="text-sm text-subtle mb-6 h-10">
+                Start searching and matching today.
+              </p>
+              <div class="mb-8">
+                <span class="text-4xl font-bold text-obsidian">$0</span>
+              </div>
+              <button class="w-full py-3 rounded-lg border border-border text-sm font-semibold text-obsidian bg-white hover:bg-slate-50 transition-colors mb-8">
+                Start Free
+              </button>
+              <ul class="space-y-4 text-sm text-subtle">
+                <li class="flex items-center gap-3">
+                  <svg class="w-4 h-4 text-obsidian shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Create professional profile
+                </li>
+                <li class="flex items-center gap-3">
+                  <svg class="w-4 h-4 text-obsidian shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Swipe &amp; match with employers
+                </li>
+                <li class="flex items-center gap-3">
+                  <svg class="w-4 h-4 text-obsidian shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Limited daily swipes
+                </li>
+                <li class="flex items-center gap-3">
+                  <svg class="w-4 h-4 text-obsidian shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Basic messaging
+                </li>
+              </ul>
+            </div>
+
+            <!-- Pro Hiring (Highlighted) -->
+            <div id="plan-pro" class="bg-white p-8 rounded-xl border-2 border-obsidian shadow-xl relative flex flex-col transform md:-translate-y-4 md:scale-105 z-10">
+              <div class="absolute top-0 right-0 left-0 -mt-3 flex justify-center">
+                <span class="bg-obsidian text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                  Most Popular
+                </span>
+              </div>
+              <h3 class="font-semibold text-xl text-obsidian mb-2">
+                Pro Hiring
+              </h3>
+              <p class="text-sm text-subtle mb-6 h-10">
+                For companies hiring consistently and efficiently.
+              </p>
+              <div class="mb-8 flex items-baseline">
+                <span class="text-4xl font-bold text-obsidian">$49</span>
+                <span class="text-subtle ml-1">/mo</span>
+              </div>
+              <button class="w-full py-3 rounded-lg bg-obsidian text-white text-sm font-semibold hover:bg-obsidian/90 transition-colors shadow-lg shadow-obsidian/20 mb-8">
+                Start Hiring
+              </button>
+              <ul class="space-y-4 text-sm text-subtle">
+                <li class="flex items-center gap-3">
+                  <svg class="w-4 h-4 text-obsidian shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Unlimited candidate swipes
+                </li>
+                <li class="flex items-center gap-3">
+                  <svg class="w-4 h-4 text-obsidian shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Smart filters &amp; skill matching
+                </li>
+                <li class="flex items-center gap-3">
+                  <svg class="w-4 h-4 text-obsidian shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Direct messaging access
+                </li>
+                <li class="flex items-center gap-3">
+                  <svg class="w-4 h-4 text-obsidian shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Interview scheduling tools
+                </li>
+              </ul>
+            </div>
+
+            <!-- Enterprise -->
+            <div id="plan-ent" class="bg-white p-8 rounded-xl border border-border shadow-sm flex flex-col hover:border-obsidian/30 hover:shadow-md transition-all duration-300">
+              <h3 class="font-semibold text-xl text-obsidian mb-2">
+                Enterprise Hiring
+              </h3>
+              <p class="text-sm text-subtle mb-6 h-10">
+                Built for structured and team-based recruitment.
+              </p>
+              <div class="mb-8">
+                <span class="text-3xl font-bold text-obsidian">Custom</span>
+              </div>
+              <button class="w-full py-3 rounded-lg border border-border text-sm font-semibold text-obsidian bg-white hover:bg-slate-50 transition-colors mb-8">
+                Contact Sales
+              </button>
+              <ul class="space-y-4 text-sm text-subtle">
+                <li class="flex items-center gap-3">
+                  <svg class="w-4 h-4 text-obsidian shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Multi-user access
+                </li>
+                <li class="flex items-center gap-3">
+                  <svg class="w-4 h-4 text-obsidian shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Hiring analytics dashboard
+                </li>
+                <li class="flex items-center gap-3">
+                  <svg class="w-4 h-4 text-obsidian shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Candidate tracking tools
+                </li>
+                <li class="flex items-center gap-3">
+                  <svg class="w-4 h-4 text-obsidian shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Workflow management
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-24 bg-obsidian text-white border-t border-white/10">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
+      <div class="px-4">
+        <div class="text-5xl md:text-6xl font-bold tracking-tight mb-2">
+          2×
+        </div>
+        <div class="text-lg font-semibold mb-1">Faster Shortlisting</div>
+        <div class="text-sm text-white/50">
+          Compared to traditional job boards
+        </div>
+      </div>
+      <div class="px-4 pt-8 md:pt-0">
+        <div class="text-5xl md:text-6xl font-bold tracking-tight mb-2">
+          35%
+        </div>
+        <div class="text-lg font-semibold mb-1">Reduced Hiring Time</div>
+        <div class="text-sm text-white/50">
+          Based on early user feedback
+        </div>
+      </div>
+      <div class="px-4 pt-8 md:pt-0">
+        <div class="text-5xl md:text-6xl font-bold tracking-tight mb-2">
+          75%
+        </div>
+        <div class="text-lg font-semibold mb-1">
+          Profile Completion Rate
+        </div>
+        <div class="text-sm text-white/50">From active candidates</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <!-- FOOTER -->
+      <footer class="md:px-12 lg:px-20 bg-white pt-20 pr-6 pb-20 pl-6">
+        <div class="flex flex-col md:flex-row max-w-7xl mr-auto ml-auto gap-x-12 gap-y-12 justify-between">
+          <div class="max-w-xs space-y-6">
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 rounded-sm">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="">
+    <rect width="20" height="14" x="2" y="7" rx="2" ry="2" class=""></rect>
+    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" class=""></path>
+  </svg>
+</div>
+              <span class="text-obsidian text-sm font-bold tracking-tight">
+                HireUp
+              </span>
+            </div>
+            <p class="text-subtle leading-relaxed text-xs">
+              Built in Kazakhstan for the global and local job market.
+            </p>
+            <div class="text-[10px] text-border">© 2025 HireUp Inc.</div>
+          </div>
+
+          <div class="flex gap-16">
+            <div class="space-y-4">
+              <h4 class="text-xs font-bold text-obsidian">Platform</h4>
+              <ul class="space-y-2 text-xs text-subtle">
+                <li><a href="#" class="hover:text-obsidian">Features</a></li>
+                <li class="">
+                  <a href="#" class="hover:text-obsidian">Security</a>
+                </li>
+                <li><a href="#" class="hover:text-obsidian">Enterprise</a></li>
+              </ul>
+            </div>
+            <div class="space-y-4">
+              <h4 class="text-xs font-bold text-obsidian">Company</h4>
+              <ul class="space-y-2 text-xs text-subtle">
+                <li><a href="#" class="hover:text-obsidian">About</a></li>
+                <li><a href="#" class="hover:text-obsidian">Careers</a></li>
+                <li class="">
+                  <a href="#" class="hover:text-obsidian">Contact</a>
+                </li>
+              </ul>
+            </div>
+            <div class="space-y-4">
+              <h4 class="text-xs font-bold text-obsidian">Connect</h4>
+              <ul class="space-y-2 text-xs text-subtle">
+                <li><a href="#" class="hover:text-obsidian">Twitter</a></li>
+                <li><a href="#" class="hover:text-obsidian">LinkedIn</a></li>
+                <li><a href="#" class="hover:text-obsidian">GitHub</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Shaders -->
+    <script type="x-shader/x-vertex" id="vertexShader">
+      uniform float uTime;
+      uniform float uDistortion;
+      uniform float uSize;
+      uniform vec2 uMouse;
+      varying float vNoise;
+
+      // Simplex Noise
+      vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+      vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+      vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }
+      vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+
+      float snoise(vec3 v) {
+          const vec2  C = vec2(1.0/6.0, 1.0/3.0) ;
+          const vec4  D = vec4(0.0, 0.5, 1.0, 2.0);
+          vec3 i  = floor(v + dot(v, C.yyy) );
+          vec3 x0 = v - i + dot(i, C.xxx) ;
+          vec3 g = step(x0.yzx, x0.xyz);
+          vec3 l = 1.0 - g;
+          vec3 i1 = min( g.xyz, l.zxy );
+          vec3 i2 = max( g.xyz, l.zxy );
+          vec3 x1 = x0 - i1 + 1.0 * C.xxx;
+          vec3 x2 = x0 - i2 + 2.0 * C.xxx;
+          vec3 x3 = x0 - 1.0 + 3.0 * C.xxx;
+          i = mod289(i);
+          vec4 p = permute( permute( permute(
+                      i.z + vec4(0.0, i1.z, i2.z, 1.0 ))
+                  + i.y + vec4(0.0, i1.y, i2.y, 1.0 ))
+                  + i.x + vec4(0.0, i1.x, i2.x, 1.0 ));
+          float n_ = 1.0/7.0;
+          vec3  ns = n_ * D.wyz - D.xzx;
+          vec4 j = p - 49.0 * floor(p * ns.z *ns.z);
+          vec4 x_ = floor(j * ns.z);
+          vec4 y_ = floor(j - 7.0 * x_ );
+          vec4 x = x_ *ns.x + ns.yyyy;
+          vec4 y = y_ *ns.x + ns.yyyy;
+          vec4 h = 1.0 - abs(x) - abs(y);
+          vec4 b0 = vec4( x.xy, y.xy );
+          vec4 b1 = vec4( x.zw, y.zw );
+          vec4 s0 = floor(b0)*2.0 + 1.0;
+          vec4 s1 = floor(b1)*2.0 + 1.0;
+          vec4 sh = -step(h, vec4(0.0));
+          vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy ;
+          vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww ;
+          vec3 p0 = vec3(a0.xy,h.x);
+          vec3 p1 = vec3(a0.zw,h.y);
+          vec3 p2 = vec3(a1.xy,h.z);
+          vec3 p3 = vec3(a1.zw,h.w);
+          vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+          p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+          vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+          m = m * m;
+          return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3) ) );
+      }
+
+      void main() {
+          vec3 pos = position;
+          float noise = snoise(vec3(pos.x * 0.5 + uTime * 0.15, pos.y * 0.5, pos.z * 0.5));
+          vNoise = noise;
+          vec3 newPos = pos + (normal * noise * uDistortion);
+          float dist = distance(uMouse * 10.0, newPos.xy);
+          float interaction = smoothstep(6.0, 0.0, dist);
+          newPos.z += interaction * 1.5;
+          vec4 mvPosition = modelViewMatrix * vec4(newPos, 1.0);
+          gl_Position = projectionMatrix * mvPosition;
+          gl_PointSize = uSize * (20.0 / -mvPosition.z);
+      }
+    </script>
+
+    <script type="x-shader/x-fragment" id="fragmentShader">
+      uniform vec3 uColor;
+      varying float vNoise;
+      void main() {
+          vec2 center = gl_PointCoord - vec2(0.5);
+          float dist = length(center);
+          if (dist > 0.45) discard;
+          float alpha = 1.0;
+          vec3 color1 = uColor;
+          vec3 color2 = vec3(0.25, 0.35, 0.45);
+          vec3 finalColor = mix(color1, color2, vNoise * 0.5 + 0.5);
+          gl_FragColor = vec4(finalColor, alpha);
+      }
+    </script>
+
+    <script>
+      lucide.createIcons();
+
+      const container = document.getElementById('canvas-container');
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0xF5F5F7, 0.04);
+
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(0, 0, 20);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      const objectGroup = new THREE.Group();
+      scene.add(objectGroup);
+
+      const geometry = new THREE.BoxGeometry(9, 9, 9, 40, 40, 40);
+      const uniforms = {
+          uTime: { value: 0 },
+          uDistortion: { value: 0.0 },
+          uSize: { value: 1.8 },
+          uColor: { value: new THREE.Color('#0F172A') },
+          uMouse: { value: new THREE.Vector2(0, 0) }
+      };
+
+      const material = new THREE.ShaderMaterial({
+          vertexShader: document.getElementById('vertexShader').textContent,
+          fragmentShader: document.getElementById('fragmentShader').textContent,
+          uniforms: uniforms,
+          transparent: true,
+          blending: THREE.NormalBlending
+      });
+
+      const points = new THREE.Points(geometry, material);
+      objectGroup.add(points);
+
+      let time = 0;
+      let mouseX = 0, mouseY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+          mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+          mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+          uniforms.uMouse.value.x += (mouseX - uniforms.uMouse.value.x) * 0.03;
+          uniforms.uMouse.value.y += (mouseY - uniforms.uMouse.value.y) * 0.03;
+      });
+
+      function adjustLayout() {
+          const w = window.innerWidth;
+          if(w < 1024) {
+              // Mobile/Tablet: Anchored higher and right
+              objectGroup.position.set(4, 5, -8);
+              objectGroup.scale.set(0.65, 0.65, 0.65);
+          } else {
+              // Desktop: Center and match size
+              objectGroup.position.set(0, 2.5, 0);
+              objectGroup.scale.set(0.65, 0.65, 0.65);
+          }
+      }
+
+      window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          adjustLayout();
+      });
+      adjustLayout();
+
+      window.addEventListener('scroll', () => {
+          const scrollY = window.scrollY;
+          objectGroup.rotation.z = scrollY * 0.0005;
+          const w = window.innerWidth;
+          const baseY = w < 1024 ? 5 : 2.5;
+          objectGroup.position.y = baseY + scrollY * 0.005;
+
+          const header = document.querySelector('header');
+          if(header) {
+            if(scrollY > 50) {
+              header.classList.add('shadow-sm');
+              header.classList.replace('bg-canvas/90', 'bg-white/90');
+            } else {
+              header.classList.remove('shadow-sm');
+              header.classList.replace('bg-white/90', 'bg-canvas/90');
+            }
+          }
+      });
+
+      function animate() {
+          requestAnimationFrame(animate);
+          time += 0.008;
+          objectGroup.rotation.y = time * 0.2;
+          uniforms.uTime.value = time;
+          camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.02;
+          camera.position.y += (mouseY * 0.5 - camera.position.y) * 0.02;
+          camera.lookAt(0,0,0);
+          renderer.render(scene, camera);
+      }
+      animate();
+
+      const sliderDistortion = document.getElementById('input-distortion');
+      const sliderSize = document.getElementById('input-size');
+      if(sliderDistortion) {
+        sliderDistortion.addEventListener('input', (e) => {
+            uniforms.uDistortion.value = parseFloat(e.target.value);
+            document.getElementById('val-entropy').innerText = e.target.value;
+        });
+      }
+      if(sliderSize) {
+        sliderSize.addEventListener('input', (e) => {
+            const val = parseFloat(e.target.value);
+            uniforms.uSize.value = val * 1.5;
+            document.getElementById('val-scale').innerText = val;
+        });
+      }
+    </script>
+
+    <script>
+      (function() {
+        const toggle = document.getElementById('price-toggle');
+        const items = [
+          { cardId: 'card-hobby', priceId: 'price-hobby', m: '$0', y: '$0' },
+          { cardId: 'card-pro', priceId: 'price-pro', m: '$49', y: '$39' },
+          { cardId: 'card-ent', priceId: 'price-ent', m: 'Custom', y: 'Custom' }
+        ];
+
+        if(toggle) {
+          toggle.addEventListener('change', (e) => {
+            const isYearly = e.target.checked;
+            items.forEach((item, i) => {
+              const card = document.getElementById(item.cardId);
+              const price = document.getElementById(item.priceId);
+
+              if(card) {
+                setTimeout(() => {
+                  card.classList.add('opacity-50', 'scale-95', 'blur-sm');
+                  setTimeout(() => {
+                    if(price) price.textContent = isYearly ? item.y : item.m;
+                    card.classList.remove('opacity-50', 'scale-95', 'blur-sm');
+                  }, 200);
+                }, i * 80);
+              }
+            });
+          });
+        }
+      })();
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => { const cards = ['pricing-hobby', 'pricing-pro', 'pricing-ent']; function updateCardState(activeId) { cards.forEach(id => { const card = document.getElementById(id); if(!card) return; const btn = card.querySelector('.pricing-btn'); const border = card.querySelector('.top-border-bar'); const isActive = id === activeId; if (isActive) { card.classList.remove('bg-white/40', 'border-slate-200', 'hover:border-slate-300'); card.classList.add('bg-white', 'border-obsidian/10', 'shadow-xl', 'shadow-slate-200/50', 'scale-[1.02]', 'z-10'); border.classList.remove('opacity-0'); border.classList.add('opacity-100'); btn.classList.remove('bg-white', 'border', 'border-slate-200', 'text-obsidian', 'hover:bg-slate-50'); btn.classList.add('bg-obsidian', 'text-white', 'shadow-lg', 'shadow-slate-900/10', 'hover:bg-slate-800'); } else { card.classList.add('bg-white/40', 'border-slate-200', 'hover:border-slate-300'); card.classList.remove('bg-white', 'border-obsidian/10', 'shadow-xl', 'shadow-slate-200/50', 'scale-[1.02]', 'z-10'); border.classList.add('opacity-0'); border.classList.remove('opacity-100'); btn.classList.add('bg-white', 'border', 'border-slate-200', 'text-obsidian', 'hover:bg-slate-50'); btn.classList.remove('bg-obsidian', 'text-white', 'shadow-lg', 'shadow-slate-900/10', 'hover:bg-slate-800'); } }); } cards.forEach(id => { const card = document.getElementById(id); if(card) { card.addEventListener('click', () => updateCardState(id)); } }); });
+    </script>
+
+    <script>
+      (function() {
+        const container = document.getElementById('testimonial-container');
+        const prevBtn = document.getElementById('testimonial-prev');
+        const nextBtn = document.getElementById('testimonial-next');
+
+        if(!container || !prevBtn || !nextBtn) return;
+
+        const slides = container.querySelectorAll('[data-index]');
+        let currentIndex = 0;
+        const maxIndex = slides.length - 1;
+
+        const stats = [
+          [
+            { val: "5x", lbl: "Faster Consensus" },
+            { val: "100%", lbl: "Audit Coverage" },
+            { val: "Zero", lbl: "Ambiguity" }
+          ],
+          [
+            { val: "3mo", lbl: "Context Retention" },
+            { val: "40%", lbl: "Less Re-work" },
+            { val: "Full", lbl: "Compliance" }
+          ],
+          [
+            { val: "2x", lbl: "Execution Velocity" },
+            { val: "50+", lbl: "Decisions/Wk" },
+            { val: "100%", lbl: "Alignment" }
+          ]
+        ];
+
+        function updateState(isInit) {
+          // Update slides
+          slides.forEach(slide => {
+            const idx = parseInt(slide.dataset.index);
+            if (idx === currentIndex) {
+              slide.classList.remove('opacity-0', 'pointer-events-none');
+              slide.classList.add('opacity-100');
+            } else {
+              slide.classList.remove('opacity-100');
+              slide.classList.add('opacity-0', 'pointer-events-none');
+            }
+          });
+
+          // Update buttons
+          prevBtn.disabled = currentIndex === 0;
+          nextBtn.disabled = currentIndex === maxIndex;
+
+          // Update stats
+          const data = stats[currentIndex];
+          for(let i=0; i<3; i++) {
+            const val = document.getElementById('t-stat-val-' + i);
+            const lbl = document.getElementById('t-stat-lbl-' + i);
+            if(val && lbl) {
+              if(!isInit) {
+                val.classList.add('opacity-0', '-translate-y-2');
+                lbl.classList.add('opacity-0');
+                setTimeout(() => {
+                  val.textContent = data[i].val;
+                  lbl.textContent = data[i].lbl;
+                  val.classList.remove('opacity-0', '-translate-y-2');
+                  lbl.classList.remove('opacity-0');
+                }, 300);
+              } else {
+                val.textContent = data[i].val;
+                lbl.textContent = data[i].lbl;
+              }
+            }
+          }
+        }
+
+        prevBtn.addEventListener('click', () => {
+          if (currentIndex > 0) {
+            currentIndex--;
+            updateState();
+          }
+        });
+
+        nextBtn.addEventListener('click', () => {
+          if (currentIndex < maxIndex) {
+            currentIndex++;
+            updateState();
+          }
+        });
+
+        updateState(true);
+      })();
+    </script>
+  
+</body></html>
